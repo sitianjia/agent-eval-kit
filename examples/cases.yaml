@@ -1,0 +1,25 @@
+cases:
+  - id: simple_add
+    instruction: "What is 17 + 25?"
+    expected_tools: [add]
+    expected_answer_pattern: "42"
+    tags: [arithmetic]
+
+  - id: price_lookup
+    instruction: "How much does 1 kg of apples cost?"
+    expected_tools: [get_price]
+    expected_answer_pattern: "5"
+    tags: [lookup]
+
+  - id: cost_calc
+    instruction: "If I buy 3 kg of oranges and 2 kg of grapes, how much do I pay in total?"
+    expected_tools: [get_price, get_price, mul, mul, add]
+    expected_answer_pattern: "45"
+    tags: [lookup, arithmetic, compose]
+
+  - id: unknown_fruit
+    instruction: "How much does 1 kg of dragonfruit cost?"
+    expected_tools: [get_price]
+    # the tool returns -1 for unknown — agent should acknowledge that
+    expected_answer_pattern: "(?:unknown|don't know|not available|no price|-1)"
+    tags: [graceful_fail]
