@@ -74,6 +74,11 @@ def under_tokens(case: Case, trace: Trace,
     return ok, 1.0 if ok else 0.0, f"tokens={total}"
 
 
+def llm_judge(case: Case, trace: Trace, **kw) -> CheckResult:
+    from .judge import llm_judge as _impl
+    return _impl(case, trace, **kw)
+
+
 _REGISTRY: dict[str, CheckFn] = {
     "answer_matches": answer_matches,
     "used_expected_tools": used_expected_tools,
@@ -81,6 +86,7 @@ _REGISTRY: dict[str, CheckFn] = {
     "under_n_steps": under_n_steps,
     "under_latency": under_latency,
     "under_tokens": under_tokens,
+    "llm_judge": llm_judge,
 }
 
 
