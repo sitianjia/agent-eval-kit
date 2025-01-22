@@ -45,7 +45,8 @@ def used_expected_tools(case: Case, trace: Trace,
     exp_c, used_c = Counter(exp), Counter(used)
     hit = sum(min(exp_c[t], used_c[t]) for t in exp_c)
     ok = hit == sum(exp_c.values())
-    return ok, hit / max(sum(exp_c.values()), 1), f"unordered hit={hit}/{sum(exp_c.values())}"
+    total = sum(exp_c.values())
+    return ok, hit / max(total, 1), f"unordered hit={hit}/{total}"
 
 
 def no_failed_tool_calls(case: Case, trace: Trace) -> CheckResult:
