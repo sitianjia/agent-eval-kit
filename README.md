@@ -83,7 +83,7 @@ cases:
 | `id` | ✅ | unique slug, used as filename |
 | `instruction` | ✅ | what the user asks the agent |
 | `inputs` | | extra structured input shown to the agent |
-| `expected_tools` | | list of tool names (multiset by default; pass `ordered: true` to a check) |
+| `expected_tools` | | list of tool names (multiset by default — order-agnostic; pass `ordered: true` to a check) |
 | `expected_answer_pattern` | | regex (case-insensitive) over the final answer |
 | `rubric` | | freeform string for LLM-judge mode |
 | `tags` | | filter / group runs |
