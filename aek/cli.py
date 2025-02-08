@@ -52,6 +52,10 @@ def main() -> None:
     rp.add_argument("--out", default="runs/latest")
 
     lp = sub.add_parser("list-checks")
+    dp = sub.add_parser("diff", help="compare two run directories")
+    dp.add_argument("--a", required=True)
+    dp.add_argument("--b", required=True)
+
 
     args = p.parse_args()
     console = Console()
@@ -61,6 +65,18 @@ def main() -> None:
             console.print(f"  • {c}")
         return
 
+
+    if args.cmd == "diff":
+        from .diff import diff as _diff
+        result = _diff(args.a, args.b)
+        for r in result["rows"]:
+            color = {"regression": "[red]", "fix": "[green]",
+                     "same": "[dim]", "new": "[yellow]",
+                     "missing": "[yellow]"}.get(r["status"], "")
+            console.print(f"{color}{r['status']:>11s}[/]  {r['case_id']}")
+        s = result["summary"]
+        console.print(f"\n[bold]regressions={s['regressions']}  fixes={s['fixes']}  same={s['same']}[/]")
+        return
     if args.cmd != "run":
         p.print_help()
         sys.exit(2)
