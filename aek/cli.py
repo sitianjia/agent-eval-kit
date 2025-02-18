@@ -53,6 +53,10 @@ def main() -> None:
 
     lp = sub.add_parser("list-checks")
     dp = sub.add_parser("diff", help="compare two run directories")
+    pp = sub.add_parser("report", help="generate html report")
+    pp.add_argument("--run", required=True)
+    pp.add_argument("--out", default="report.html")
+
     dp.add_argument("--a", required=True)
     dp.add_argument("--b", required=True)
 
@@ -66,6 +70,12 @@ def main() -> None:
         return
 
 
+
+    if args.cmd == "report":
+        from .report import write_html
+        write_html(args.run, args.out)
+        console.print(f"wrote {args.out}")
+        return
     if args.cmd == "diff":
         from .diff import diff as _diff
         result = _diff(args.a, args.b)
