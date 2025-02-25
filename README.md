@@ -136,9 +136,9 @@ LLM-judges are useful but noisy. The harness treats them as just another check (
 - [x] YAML cases + check composition
 - [x] Trace dump / replay
 - [x] CLI with rich summary
-- [ ] LLM-as-judge check (`aek.checks.llm_judge`)
-- [ ] HTML report generator (`aek report`)
-- [ ] Diff mode: compare two run directories
+- [x] LLM-as-judge check (`aek.checks.llm_judge`)
+- [x] HTML report generator (`aek report`)
+- [x] Diff mode: compare two run directories
 
 ## License
 
