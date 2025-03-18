@@ -51,7 +51,11 @@ class Agent:
         trace.steps.append(Step(role="user", content=user_content))
 
         t0 = time.perf_counter()
+        deadline = t0 + case.timeout_s
         for step_i in range(self.max_steps):
+            if time.perf_counter() > deadline:
+                trace.meta["timeout"] = True
+                break
             t_step = time.perf_counter()
             resp = self.client.chat.completions.create(
                 model=self.model,
