@@ -50,6 +50,7 @@ def main() -> None:
     rp.add_argument("--model", default="gpt-4o-mini")
     rp.add_argument("--base-url", default=None)
     rp.add_argument("--out", default="runs/latest")
+    rp.add_argument("--tags", nargs="+", default=None, help="filter cases by tag(s)")
 
     lp = sub.add_parser("list-checks")
     dp = sub.add_parser("diff", help="compare two run directories")
@@ -92,6 +93,11 @@ def main() -> None:
         sys.exit(2)
 
     cases = load_cases(args.cases)
+    if args.tags:
+        cases = [c for c in cases if set(args.tags) & set(c.tags)]
+        if not cases:
+            console.print("[yellow]no cases match those tags[/]")
+            return
     specs = _load_check_specs(args.checks)
     registry = _import_registry(args.tools)
     agent = Agent(registry, model=args.model, base_url=args.base_url)
