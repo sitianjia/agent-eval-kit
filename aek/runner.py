@@ -15,12 +15,12 @@ from .io import save_trace, save_verdicts
 @dataclass
 class CheckSpec:
     name: str
-    kwargs: dict = None
+    kwargs: dict | None = None
     weight: float = 1.0
     required: bool = True   # if False, failure doesn't fail the case overall
 
 
-def evaluate(case: Case, trace: Trace, specs: list[CheckSpec]) -> Verdict:
+def evaluate(case: Case, trace: Trace, specs: list["CheckSpec"]) -> Verdict:
     v = Verdict(case_id=case.id, passed=True, score=0.0)
     total_w = 0.0
     notes = []
@@ -41,7 +41,7 @@ def evaluate(case: Case, trace: Trace, specs: list[CheckSpec]) -> Verdict:
 def run_suite(
     cases: list[Case],
     agent: Agent,
-    specs: list[CheckSpec],
+    specs: list["CheckSpec"],
     out_dir: str | Path,
     progress_cb: Optional[Callable[[int, int, Verdict], None]] = None,
 ) -> list[Verdict]:
