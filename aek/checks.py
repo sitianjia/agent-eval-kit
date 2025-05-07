@@ -88,6 +88,7 @@ _REGISTRY: dict[str, CheckFn] = {
     "under_latency": under_latency,
     "under_tokens": under_tokens,
     "llm_judge": llm_judge,
+    "answer_is_valid_json": None,
 }
 
 
@@ -99,3 +100,7 @@ def get(name: str) -> CheckFn:
 
 def list_checks() -> list[str]:
     return sorted(_REGISTRY)
+
+
+from .checks_json import answer_is_valid_json as _json_check  # noqa: E402
+_REGISTRY["answer_is_valid_json"] = _json_check
