@@ -102,6 +102,17 @@ cases:
 
 Each check is `(case, trace) -> (passed, score, note)`. Add your own by importing `aek.checks` and writing a function with that signature.
 
+## Filtering & tags
+
+Tag cases and run only the subset you care about:
+
+```bash
+aek run --cases examples/cases.yaml --checks examples/checks.yaml \
+    --tools examples.tools_calc:registry \
+    --tags arithmetic compose \
+    --out runs/arith
+```
+
 ## Re-scoring
 
 Because traces are saved verbatim, you can rerun checks without burning API calls:
