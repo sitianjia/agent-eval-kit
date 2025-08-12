@@ -53,13 +53,14 @@ def main() -> None:
     rp.add_argument("--tags", nargs="+", default=None, help="filter cases by tag(s)")
 
     lp = sub.add_parser("list-checks")
+
     dp = sub.add_parser("diff", help="compare two run directories")
+    dp.add_argument("--a", required=True)
+    dp.add_argument("--b", required=True)
+
     pp = sub.add_parser("report", help="generate html report")
     pp.add_argument("--run", required=True)
     pp.add_argument("--out", default="report.html")
-
-    dp.add_argument("--a", required=True)
-    dp.add_argument("--b", required=True)
 
 
     args = p.parse_args()
