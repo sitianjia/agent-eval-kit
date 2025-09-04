@@ -1,0 +1,22 @@
+# Multi-step composition cases — used to stress agents that often
+# short-circuit after one tool call.
+cases:
+  - id: compose_2step
+    instruction: "What is (apples + bananas) × 4?"
+    expected_tools: [get_price, get_price, add, mul]
+    expected_answer_pattern: "34"
+    tags: [compose]
+    timeout_s: 30
+
+  - id: compose_3step
+    instruction: "(apples + bananas + oranges) × 2 — in yuan/kg total."
+    expected_tools: [get_price, get_price, get_price, add, add, mul]
+    expected_answer_pattern: "31"
+    tags: [compose, multi-tool]
+    timeout_s: 45
+
+  - id: needs_retry
+    instruction: "How much does dragonfruit cost? If unknown, fall back to oranges."
+    expected_tools: [get_price, get_price]
+    expected_answer_pattern: "7"
+    tags: [graceful_fail, compose]
