@@ -54,6 +54,7 @@ def save_trace(trace: Trace, path: str | os.PathLike) -> None:
 
 
 def load_traces(path: str | os.PathLike) -> Iterator[Trace]:
+    """Yield Trace objects from a file or directory."""
     p = Path(path)
     if p.is_dir():
         files = sorted(p.glob("*.json"))
