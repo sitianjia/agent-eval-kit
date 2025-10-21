@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.3.0] - 2025-10
+### Added
+- Async runner for parallel case execution (`aek.async_runner`)
+- `answer_is_valid_json` check with optional schema
+- Compose / multi-step example cases
+
 ## [0.2.0] - 2025-04
 ### Added
 - Anthropic Claude backend (`aek.backends.anthropic_agent`)
