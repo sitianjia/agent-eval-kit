@@ -25,7 +25,10 @@ User asked:
 Agent's final answer:
 {answer}
 
-JSON only, no prose:"""
+Output JSON only, no prose. Score 1.0 = perfect, 0.0 = totally wrong.
+Use 0.5 for partial credit. Be strict on factual errors.
+
+JSON:"""
 
 
 def llm_judge(case: Case, trace: Trace, model: str = "gpt-4o-mini",
