@@ -41,7 +41,7 @@ class Step:
 
 
 @dataclass
-class Trace:
+class Trace:  # noqa: D101
     """A full agent rollout for one case."""
     case_id: str
     steps: list[Step] = field(default_factory=list)
