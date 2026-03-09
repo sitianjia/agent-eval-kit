@@ -141,6 +141,19 @@ LLM-judges are useful but noisy. The harness treats them as just another check (
 - **Web UI**: traces are JSON. Look at them in your editor.
 - **A built-in case zoo**: the cases that matter are yours.
 
+## Cost reporting
+
+Token counts are recorded per trace, so a rough USD estimate is one line:
+
+```python
+from aek.cost import total_usd
+from aek.io import load_traces
+
+print(f"${total_usd(load_traces('runs/baseline/traces'), 'gpt-4o-mini'):.4f}")
+```
+
+Rates are best-effort and live in `aek/cost.py` — adjust them when prices move.
+
 ## Roadmap
 
 - [x] Tool registry + decorator
