@@ -12,6 +12,8 @@ _RATES = {
     "claude-3-5-sonnet-latest": {"in": 3.00, "out": 15.00},
     "claude-3-5-haiku-latest":  {"in": 0.80,  "out": 4.00},
     "claude-3-7-sonnet-latest": {"in": 3.00, "out": 15.00},
+    "claude-opus-4":            {"in": 15.00, "out": 75.00},
+    "claude-sonnet-4-5":        {"in": 3.00, "out": 15.00},
 }
 
 
